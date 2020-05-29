@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import fire from './config/fire'
+import firebase from '../firebase'
 import Login from './components/Login/Login.js';
 import PostView from './components/PostView/PostView.js'
 
-const db = fire.database()
+const db = firebase.database()
 
 class App extends Component {
     state = {

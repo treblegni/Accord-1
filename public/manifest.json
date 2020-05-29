@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "Discord Clone",
+  "name": "ReactJS application that is a clone of Discord.",
   "icons": [
     {
       "src": "accordlogo.png",
