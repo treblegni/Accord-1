@@ -5,8 +5,8 @@ import ENV from 'dotenv';
 
 import './index.css';
 
-ReactDOM.render(<App />, document.getElementById('root'));
-
 ENV.config();
+
+ReactDOM.render(<App />, document.getElementById('root'));
 
 // serviceWorker.unregister();

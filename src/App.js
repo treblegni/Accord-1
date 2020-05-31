@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import firebase from '../firebase'
+import firebase from './firebase'
 import Login from './components/Login/Login.js';
 import PostView from './components/PostView/PostView.js'
 
@@ -23,7 +23,7 @@ class App extends Component {
 
     actions = {
         login: (email,password) => {
-            fire.auth().signInWithEmailAndPassword(email, password)
+            firebase.auth().signInWithEmailAndPassword(email, password)
                 .then((u) => {
                     console.log('Successfully Logged In');
                 })
@@ -32,7 +32,7 @@ class App extends Component {
                 })
         },
         createAccount: (email,password) => {
-            fire.auth().createUserWithEmailAndPassword(email, password)
+            firebase.auth().createUserWithEmailAndPassword(email, password)
                 .then((u) => {
                     const usersRef = db.ref('users')
 
@@ -54,7 +54,7 @@ class App extends Component {
                 })
         },
         logout: () => {
-            fire.auth().signOut()
+            firebase.auth().signOut()
         },
         createRoom: (roomDetails) => {
             const roomsRef = db.ref('rooms')
@@ -142,7 +142,7 @@ class App extends Component {
     }
 
     authListener = () => {
-        fire.auth().onAuthStateChanged((user) => {
+        firebase.auth().onAuthStateChanged((user) => {
             if (user) {
                 this.setState({ user })
                 this.loadOwnedRooms()
