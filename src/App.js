@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import firebase from './firebase'
+import Firebase from 'firebase'
 import Login from './components/Login/Login.js';
 import PostView from './components/PostView/PostView.js'
 
@@ -22,6 +23,34 @@ class App extends Component {
     }
 
     actions = {
+        googleLogin: () => {
+			const provider = new Firebase.auth.GoogleAuthProvider()
+
+			Firebase.auth().signInWithPopup(provider)
+                .then((u) => {
+					const usersRef = this.db.ref('users')
+					
+					if (!usersRef.child(u.user.uid)) {
+						usersRef.update({
+							[u.user.uid]: {
+								id: u.user.uid,
+								displayName: u.user.email,
+								email: u.user.email,
+								name: 'n/a'
+							}
+						})
+	
+						u.user.updateProfile({
+							displayName: u.user.email
+						})
+					}
+					
+                    console.log('Successfully Logged In');
+                })
+                .catch((err) => {
+                    console.log('Error: ' + err.toString())
+                })
+		},
         login: (email,password) => {
             firebase.auth().signInWithEmailAndPassword(email, password)
                 .then((u) => {
